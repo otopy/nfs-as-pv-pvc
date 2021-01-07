@@ -1,0 +1,12 @@
+appname: nfs-pv
+appnamespaces: default
+
+capacity:
+  storage: 3Gi
+volumeMode: Filesystem
+accessModes: ReadWriteMany
+persistentVolumeReclaimPolicy: Recycle
+storageClassName: nfs
+nfs:
+  server: 192.168.99.108
+  path: /var/nfs

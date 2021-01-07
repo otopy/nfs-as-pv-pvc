@@ -1,0 +1,20 @@
+{{- $AppName :=  .Values.appname -}}
+{{- $AppaccessModes :=  .Values.accessModes  -}}
+{{- $AppstorageClassName := .Values.storageClassName  -}}
+{{- $Appstorage := .Values.capacity.storage -}}
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ $AppName }}-claim
+spec:
+  storageClassName: {{ $AppstorageClassName }}
+  accessModes:
+    - {{ $AppaccessModes }}
+  resources:
+    requests:
+      storage: {{ $Appstorage }}
+
+---

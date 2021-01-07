@@ -1,0 +1,31 @@
+{{- $AppName :=  .Values.appname -}}
+{{- $Appstorage := .Values.capacity.storage -}}
+{{- $AppvolumeMode :=  .Values.volumeMode -}}
+{{- $AppaccessModes :=  .Values.accessModes  -}}
+{{- $ApppersistentVolumeReclaimPolicy := .Values.persistentVolumeReclaimPolicy  -}}
+{{- $AppstorageClassName := .Values.storageClassName  -}}
+{{- $Appnfsserver := .Values.nfs.server  -}}
+{{- $Appnfspath := .Values.nfs.path  -}}
+
+---
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ $AppName }}
+spec:
+  capacity:
+    storage: {{ $Appstorage }}
+  volumeMode: {{ $AppvolumeMode }}
+  accessModes:
+    - {{ $AppaccessModes }}
+  persistentVolumeReclaimPolicy: {{ $ApppersistentVolumeReclaimPolicy }}
+  storageClassName: {{ $AppstorageClassName }}
+  mountOptions:
+    - hard
+    - nfsvers=4.1
+  nfs:
+    path: {{ $Appnfspath }}
+    server: {{ $Appnfsserver }}
+    
+---
